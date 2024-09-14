@@ -6,6 +6,7 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 function Item({ item }) {
     return (
