@@ -12,26 +12,26 @@ import { Link } from "react-router-dom";
 function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Link to={'/electronics'}>
+      <Link to={"/category/electronics"}>
         <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
           <p className="flex items-center hover:text-blue-500 transition-colors">Electronics</p>
         </Typography>
       </Link>
-      <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Jewelery
-        </a>
-      </Typography>
-      <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Men's clothing
-        </a>
-      </Typography>
-      <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Women's clothing
-        </a>
-      </Typography>
+      <Link to={"/category/jewelery"}>
+        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
+          <p className="flex items-center hover:text-blue-500 transition-colors">Jewelery</p>
+        </Typography>
+      </Link>
+      <Link to={"/category/men's clothing"}>
+        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
+          <p className="flex items-center hover:text-blue-500 transition-colors">Men's clothing</p>
+        </Typography>
+      </Link>
+      <Link to={"/category/women's clothing"}>
+        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
+          <p className="flex items-center hover:text-blue-500 transition-colors">Women's clothing</p>
+        </Typography>
+      </Link>
       <CartWidget />
     </ul>
   );
@@ -55,7 +55,7 @@ function NavBar() {
     <Navbar className="mx-auto max-w-screen-xl px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Link to='/'>
-          <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
+          <Typography as="li" variant="small" color="blue-gray" className="p-1 font-bold text-xl">
             TecnoStore
           </Typography>
         </Link>
