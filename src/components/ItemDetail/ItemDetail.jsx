@@ -32,12 +32,12 @@ function ItemDetail({ item }) {
                     </Typography>
                 </div>
                 <Typography color="blue-gray" variant="h6">
-                    Color
+                    Count Products
                 </Typography>
-                <ItemCount />
+                <ItemCount  itemDetail={ item }/>
             </div>
         </div>
     )
 }
 
-export default ItemDetail;
+export default ItemDetail

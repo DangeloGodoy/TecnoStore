@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { getProductsById } from "../../firebase/db";
 import ItemDetail from "../ItemDetail/ItemDetail"
 
 function ItemDetailContainer() {
@@ -8,9 +9,7 @@ function ItemDetailContainer() {
   const [product, setProduct] = useState({})
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => setProduct(data))
+    getProductsById(id, setProduct)
   }, [id])
   return (
     <section className="py-16 px-8">

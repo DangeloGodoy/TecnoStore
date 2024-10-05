@@ -1,14 +1,18 @@
 import { Button, ButtonGroup, Chip } from "@material-tailwind/react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { cartContext } from "../../context/cartContext";
 
-function ItemCount() {
-    const [count, setCount] = useState(0)
+
+function ItemCount({ itemDetail }) {
+    const { addToCart } = useContext(cartContext)
+    const [count, setCount] = useState(1)
     const countAdd = () => setCount(count + 1)
     const countRest = () => {
         if (count > 0) {
             setCount(count - 1)
         }
     }
+    const handleAddToCart = () => addToCart({...itemDetail, quantity:count})
     return (
         <div className="flex-col">
             <div className="my-8 mt-3 flex items-center gap-2">
@@ -19,7 +23,7 @@ function ItemCount() {
                 </ButtonGroup>
             </div>
             <div className="mb-4 flex w-full items-center gap-3 md:w-1/2 ">
-                <Button color="gray" className="w-52">
+                <Button onClick={handleAddToCart} color="gray" className="w-52">
                     Add to Cart
                 </Button>
             </div>

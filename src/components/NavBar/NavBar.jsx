@@ -12,24 +12,24 @@ import { Link } from "react-router-dom";
 function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Link to={"/category/electronics"}>
+      <Link to={"/category/Smartphone"}>
         <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Electronics</p>
+          <p className="flex items-center hover:text-blue-500 transition-colors">Smartphone</p>
         </Typography>
       </Link>
-      <Link to={"/category/jewelery"}>
+      <Link to={"/category/Console"}>
         <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Jewelery</p>
+          <p className="flex items-center hover:text-blue-500 transition-colors">Console</p>
         </Typography>
       </Link>
-      <Link to={"/category/men's clothing"}>
+      <Link to={"/category/SmartTV"}>
         <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Men's clothing</p>
+          <p className="flex items-center hover:text-blue-500 transition-colors">SmartTV</p>
         </Typography>
       </Link>
-      <Link to={"/category/women's clothing"}>
+      <Link to={"/category/Notebook"}>
         <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Women's clothing</p>
+          <p className="flex items-center hover:text-blue-500 transition-colors">Notebook</p>
         </Typography>
       </Link>
       <CartWidget />

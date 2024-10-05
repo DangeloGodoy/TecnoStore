@@ -1,26 +1,16 @@
 import { useState, useEffect } from "react";
-import { Card, CardHeader, CardBody, CardFooter, Typography, Button } from "@material-tailwind/react";
+import { useParams } from "react-router-dom"
+import { Card } from "@material-tailwind/react"
+import { getProducts, getProductByCategory } from "../../firebase/db";
 import Item from '../Item/Item'
-import { useParams } from "react-router-dom";
 
 function ItemListContainer({ textProps }) {
     const [items, setItems] = useState([])
     const { nameCategory } = useParams()
-    
-
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(data => {
-                if (!nameCategory) {
-                    setItems(data)
-                } else {
-                    fetch(`https://fakestoreapi.com/products/category/${nameCategory}`)
-                    .then(res => res.json())
-                    .then(data => setItems(data))
-                }
-            })
+        nameCategory ? getProductByCategory(nameCategory, setItems) : getProducts(setItems)
     }, [nameCategory])
+    
     return (
         <div className="flex flex-wrap gap-4 justify-around pt-2">
             {items.map((itemProps) => (
