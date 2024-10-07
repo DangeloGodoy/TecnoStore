@@ -5,6 +5,7 @@ import {
     query,
     where,
     getDoc,
+    addDoc,
     doc
 } from "firebase/firestore"
 import { app } from "./config"
@@ -38,9 +39,19 @@ export const getProductsById = async (categoryID, setProduct) => {
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
-        setProduct(docSnap.data())
+        setProduct({id: docSnap.id, ...docSnap.data()})
     } else {
         console.log("No such document!")
     }
 
+}
+
+export const createOrder = async (order) => {
+    try {
+        const docRef = await addDoc(collection(db, "orders"), order)
+        return docRef.id
+      } catch (error) {
+        console.error("Error adding document: ", error)
+        throw error
+      }
 }

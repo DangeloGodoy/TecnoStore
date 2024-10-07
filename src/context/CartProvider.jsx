@@ -23,12 +23,15 @@ function CartProvider({ children }) {
         return
     }
 
+    const clearCart = () => setCart([])
+ 
     return (
-        <cartContext.Provider value={{ cart, addToCart }}>
+        <cartContext.Provider value={{ cart, addToCart, clearCart }}>
             {children}
             <ToastContainer stacked/>
         </cartContext.Provider>
     )
+
 }
 
 export default CartProvider

@@ -32,7 +32,9 @@ function NavList() {
           <p className="flex items-center hover:text-blue-500 transition-colors">Notebook</p>
         </Typography>
       </Link>
-      <CartWidget />
+      <Link to={"/cart"}>
+        <CartWidget />
+      </Link>
     </ul>
   );
 }

@@ -2,7 +2,6 @@ import { Button, ButtonGroup, Chip } from "@material-tailwind/react";
 import { useState, useContext } from "react";
 import { cartContext } from "../../context/cartContext";
 
-
 function ItemCount({ itemDetail }) {
     const { addToCart } = useContext(cartContext)
     const [count, setCount] = useState(1)
