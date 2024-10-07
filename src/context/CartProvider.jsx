@@ -9,14 +9,14 @@ function CartProvider({ children }) {
 
     const addToCart = (item) => {
         if (isDuplicate(item)) {
-            toast.warn("Producto ya existente en el carrito!", {
+            toast.warn("Product already existing in the cart!", {
                 position: "top-center",
                 theme: "colored"
             });
             return;
         }
         setCart((prevCart) => [...prevCart, item]);
-        toast.success("Producto agregado al carrito!", {
+        toast.success("Product added to cart!", {
             position: "top-center",
             theme: "colored"
         });
@@ -24,11 +24,18 @@ function CartProvider({ children }) {
     }
 
     const clearCart = () => setCart([])
- 
+
+    const cartTotal = () => {
+        const totalPrice = cart.reduce((total, product) => total + (product.price * product.quantity), 0)
+        const totalProduct = cart.reduce((total, product) => total + product.quantity, 0)
+
+        return { totalPrice, totalProduct }
+    }
+
     return (
-        <cartContext.Provider value={{ cart, addToCart, clearCart }}>
+        <cartContext.Provider value={{ cart, addToCart, clearCart, cartTotal }}>
             {children}
-            <ToastContainer stacked/>
+            <ToastContainer stacked />
         </cartContext.Provider>
     )
 

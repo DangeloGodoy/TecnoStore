@@ -8,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 function CheckoutFrom() {
     const TABLE_HEAD = ["Product Name", "Category", "Quantity", "Price"];
-    const { cart, clearCart } = useContext(cartContext)
-    const totalProduct = cart.reduce((total, product) => total + product.quantity, 0)
-    const totalPrice = cart.reduce((total, product) => total + (product.price * product.quantity), 0)
+    const { cart, clearCart, cartTotal } = useContext(cartContext)
+    const { totalProduct, totalPrice } = cartTotal()
     const navigate = useNavigate()
 
     if (cart.length === 0) {

@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 
 function Cart() {
     const TABLE_HEAD = ["Product Name", "Category", "Quantity", "Price"];
-    const { cart } = useContext(cartContext)
-    const totalProduct = cart.reduce((total, product) => total + product.quantity, 0)
-    const totalPrice = cart.reduce((total, product) => total + (product.price * product.quantity), 0)
+    const { cart, cartTotal } = useContext(cartContext)
+    const { totalProduct, totalPrice } = cartTotal()
 
     return (
         <Card className="h-full w-full overflow-scroll">
