@@ -18,7 +18,7 @@ function CheckoutFrom() {
             title: "Your cart is empty",
             text: "Please, add productos to cart",
             icon: "info"
-        });
+        }).then((result) => navigate('/'))
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
