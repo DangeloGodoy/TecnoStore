@@ -1,4 +1,4 @@
-import { CardHeader, CardBody, CardFooter, Typography, Button, } from "@material-tailwind/react";
+import { CardHeader, CardBody, CardFooter, Typography, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 function Item({ item }) {
