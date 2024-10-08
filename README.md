@@ -42,4 +42,4 @@ Las contribuciones son bienvenidas. Si tienes ideas para mejorar la aplicación,
 
 ## Licencia
 
-Este proyecto está bajo la [Licencia MIT](LICENSE).
+Este proyecto está bajo la [Licencia MIT].
