@@ -7,34 +7,54 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import CartWidget from '../CartWidget/CartWidget'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Link to={"/category/Smartphone"}>
-        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Smartphone</p>
+      <NavLink
+        to="/category/Smartphone"
+        className={({ isActive }) =>
+          isActive ? "text-blue-500 transition-colors" : "text-blue-gray-900 hover:text-blue-500 transition-colors"}
+      >
+        <Typography as="li" variant="small" className="p-1 font-medium">
+          <p className="flex items-center">Smartphone</p>
         </Typography>
-      </Link>
-      <Link to={"/category/Console"}>
-        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Console</p>
+      </NavLink>
+
+      <NavLink
+        to="/category/Console"
+        className={({ isActive }) =>
+          isActive ? "text-blue-500 transition-colors" : "text-blue-gray-900 hover:text-blue-500 transition-colors"}
+      >
+        <Typography as="li" variant="small" className="p-1 font-medium">
+          <p className="flex items-center">Console</p>
         </Typography>
-      </Link>
-      <Link to={"/category/SmartTV"}>
-        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">SmartTV</p>
+      </NavLink>
+
+      <NavLink
+        to="/category/SmartTV"
+        className={({ isActive }) =>
+          isActive ? "text-blue-500 transition-colors" : "text-blue-gray-900 hover:text-blue-500 transition-colors"}
+      >
+        <Typography as="li" variant="small" className="p-1 font-medium">
+          <p className="flex items-center">SmartTV</p>
         </Typography>
-      </Link>
-      <Link to={"/category/Notebook"}>
-        <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-          <p className="flex items-center hover:text-blue-500 transition-colors">Notebook</p>
+      </NavLink>
+
+      <NavLink
+        to="/category/Notebook"
+        className={({ isActive }) =>
+          isActive ? "text-blue-500 transition-colors" : "text-blue-gray-900 hover:text-blue-500 transition-colors"}
+      >
+        <Typography as="li" variant="small" className="p-1 font-medium">
+          <p className="flex items-center">Notebook</p>
         </Typography>
-      </Link>
-      <Link to={"/cart"}>
+      </NavLink>
+
+      <NavLink to="/cart">
         <CartWidget />
-      </Link>
+      </NavLink>
     </ul>
   );
 }
@@ -56,11 +76,11 @@ function NavBar() {
   return (
     <Navbar className="mx-auto max-w-screen-xl px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Link to='/'>
+        <NavLink to='/'>
           <Typography as="li" variant="small" color="blue-gray" className="p-1 font-bold text-xl">
             TecnoStore
           </Typography>
-        </Link>
+        </NavLink>
         <div className="hidden lg:block">
           <NavList />
         </div>

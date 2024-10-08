@@ -1,12 +1,19 @@
-import { Button, Card, Typography } from "@material-tailwind/react";
+import {
+    Button,
+    Card,
+    Typography,
+    IconButton,
+    Input
+} from "@material-tailwind/react";
 import { cartContext } from "../../context/cartContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import ModalEditCart from "../Modal/ModalEditCart";
 
 
 function Cart() {
-    const TABLE_HEAD = ["Product Name", "Category", "Quantity", "Price"];
-    const { cart, cartTotal } = useContext(cartContext)
+    const TABLE_HEAD = ["Product Name", "Category", "Quantity", "Price"]
+    const { cart, cartTotal, removeProduct, clearCart } = useContext(cartContext)
     const { totalProduct, totalPrice } = cartTotal()
 
     return (
@@ -49,20 +56,21 @@ function Cart() {
                                     </Typography>
                                 </td>
                                 <td className="p-4">
-                                    <Typography
-                                        variant="small"
-                                        className="font-normal text-gray-600"
-                                    >
-                                        {quantity}
-                                    </Typography>
+                                    {quantity}
                                 </td>
-                                <td className="p-4">
+                                <td className="flex items-center gap-3">
                                     <Typography
                                         variant="small"
                                         className="font-normal text-gray-600"
                                     >
                                         $ {(price * quantity).toFixed(2)}
                                     </Typography>
+                                    <ModalEditCart
+                                        title={title}
+                                        category={category}
+                                        quantity={quantity}
+                                        price={price}
+                                    />
                                 </td>
                             </tr>
                         );
@@ -103,11 +111,11 @@ function Cart() {
             </table>
             <div className="flex flex-row-reverse pr-52 py-1.5">
                 <Link to={"/cart/checkout"}>
-                    <Button className="md">go to CheckOut</Button>
+                    <Button className="md">Go to Checkout</Button>
                 </Link>
             </div>
         </Card>
-    )
+    );
 }
 
 export default Cart

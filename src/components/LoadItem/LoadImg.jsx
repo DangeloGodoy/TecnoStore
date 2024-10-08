@@ -1,5 +1,3 @@
-import { Typography } from "@material-tailwind/react";
-
 function LoadImg() {
     return (
         <div className="animate-pulse grid h-36 w-36 place-items-center rounded-lg bg-gray-300">

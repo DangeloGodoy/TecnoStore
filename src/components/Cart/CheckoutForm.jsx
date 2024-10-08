@@ -1,29 +1,56 @@
 import { Input, Card, Typography, Button } from "@material-tailwind/react"
 import { cartContext } from "../../context/cartContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { createOrder } from "../../firebase/db";
 import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom";
+import ErrorIcon from '@mui/icons-material/Error';
 
 function CheckoutFrom() {
     const TABLE_HEAD = ["Product Name", "Category", "Quantity", "Price"];
     const { cart, clearCart, cartTotal } = useContext(cartContext)
     const { totalProduct, totalPrice } = cartTotal()
     const navigate = useNavigate()
+    const [errors, setErrors] = useState({})
 
     if (cart.length === 0) {
         Swal.fire({
             title: "Your cart is empty",
             text: "Please, add productos to cart",
             icon: "info"
-        }).then((result) => navigate('/'))
+        }).then(() => navigate('/'))
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const name = e.target.name.value
-        const email = e.target.email.value
-        const phone = e.target.phone.value
+        const name = e.target.name.value.trim()
+        const email = e.target.email.value.trim()
+        const phone = e.target.phone.value.trim()
+
+        let valid = true
+        let newErrors = {}
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+        if (name === '') {
+            valid = false
+            newErrors.name = "Name is required!"
+        }
+        if (email === '') {
+            valid = false
+            newErrors.email = "Email address is required!"
+        } else if (!emailRegex.test(email)) {
+            valid = false
+            newErrors.email = "Please enter a valid email address!"
+        }
+        if (phone === '') {
+            valid = false
+            newErrors.phone = "Phone number is required!"
+        }
+
+        setErrors(newErrors)
+        if (!valid) {
+            return
+        }
 
         const order = {
             buyer: { name, email, phone },
@@ -44,7 +71,7 @@ function CheckoutFrom() {
                 willClose: () => {
                     clearInterval(timerInterval)
                 }
-            }).then((result) => {
+            }).then(() => {
                 navigate('/')
                 clearCart()
             })
@@ -159,12 +186,41 @@ function CheckoutFrom() {
                 >
                     Contact Information
                 </Typography>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-7" action="">
-                    <Input id="name" type='text' variant='standard' label="Name" placeholder="Name" required />
-                    <Input id="phone" type='tel' variant='standard' label="Phone number" placeholder="Phone number" required />
-                    <Input id="email" type='email' variant='standard' label="Email addres" placeholder="Email addres" required />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-7">
+                    <div>
+                        <Input id="name" type='text' variant='standard' label="Name" placeholder="Name" />
+                        {errors.name && (
+                            <Typography
+                                variant="small"
+                                color="red"
+                                className="mt-2 flex items-center gap-1 font-normal"
+                            >
+                                <ErrorIcon />{errors.name}
+                            </Typography>)}
+                    </div>
+                    <div>
+                        <Input id="phone" type='tel' variant='standard' label="Phone number" placeholder="Phone number" />
+                        {errors.phone && (
+                            <Typography
+                                variant="small"
+                                color="red"
+                                className="mt-2 flex items-center gap-1 font-normal"
+                            >
+                                <ErrorIcon />{errors.phone}
+                            </Typography>)}
+                    </div>
+                    <div>
+                        <Input id="email" type='text' variant='standard' label="Email addres" placeholder="Email addres" />
+                        {errors.email && (
+                            <Typography
+                                variant="small"
+                                color="red"
+                                className="mt-2 flex items-center gap-1 font-normal"
+                            >
+                                <ErrorIcon />{errors.email}
+                            </Typography>)}
+                    </div>
                     <Button type='submit'>Order Now</Button>
-
                 </form>
                 <div >
                 </div>

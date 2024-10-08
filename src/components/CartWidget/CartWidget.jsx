@@ -4,9 +4,10 @@ import { cartContext } from '../../context/cartContext';
 import { useContext } from 'react';
 
 function CartWidget() {
-    const { cart } = useContext(cartContext)
+    const { cartTotal } = useContext(cartContext)
+    const { totalProduct } = cartTotal()
     return (
-        <Badge content={cart.length}>
+        <Badge content={totalProduct}>
             <Button><ShoppingBasketIcon /></Button>            
         </Badge>
     )

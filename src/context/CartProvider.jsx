@@ -13,13 +13,13 @@ function CartProvider({ children }) {
                 position: "top-center",
                 theme: "colored"
             });
-            return;
+            return
         }
         setCart((prevCart) => [...prevCart, item]);
         toast.success("Product added to cart!", {
             position: "top-center",
             theme: "colored"
-        });
+        })
         return
     }
 
@@ -32,12 +32,28 @@ function CartProvider({ children }) {
         return { totalPrice, totalProduct }
     }
 
-    return (
-        <cartContext.Provider value={{ cart, addToCart, clearCart, cartTotal }}>
-            {children}
-            <ToastContainer stacked />
-        </cartContext.Provider>
-    )
+    const removeProduct = (title) => {
+        setCart((prevCart) => prevCart.filter((item) => item.title !== title))
+        toast.error("Product remove of the cart!", {
+            position: "top-center",
+            theme: "colored"
+        })
+    }
+
+    const updateProductQty = (title, newQuantity) => {
+        setCart((prevCart) => prevCart.map((item) => item.title === title ? { ...item, quantity: newQuantity } : item ))
+        toast.info("Update quantity success!", {
+            position: "top-center",
+            theme: "colored"
+        })
+    }
+
+return (
+    <cartContext.Provider value={{ cart, addToCart, clearCart, cartTotal, removeProduct, updateProductQty }}>
+        {children}
+        <ToastContainer stacked />
+    </cartContext.Provider>
+)
 
 }
 
