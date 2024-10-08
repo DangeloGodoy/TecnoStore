@@ -34,6 +34,7 @@ TecnoStore es una aplicación de comercio electrónico que permite a los usuario
 ## Uso
 
 •  Explora las diferentes categorías de productos.
+
 •  Agrega productos al carrito y procede al checkout.
 
 ## Contribuciones
