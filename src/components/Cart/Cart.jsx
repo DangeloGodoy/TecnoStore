@@ -9,12 +9,39 @@ import { cartContext } from "../../context/cartContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ModalEditCart from "../Modal/ModalEditCart";
-
+import Swal from "sweetalert2";
 
 function Cart() {
     const TABLE_HEAD = ["Product Name", "Category", "Quantity", "Price"]
-    const { cart, cartTotal, removeProduct, clearCart } = useContext(cartContext)
+    const { cart, cartTotal, clearCart } = useContext(cartContext)
     const { totalProduct, totalPrice } = cartTotal()
+    const removeAllProducts = () => {
+        if (cart.length === 0) {
+            Swal.fire({
+                title: "The cart is empty",
+                icon: "warning"
+              })
+        } else {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    clearCart()
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your cart has been cleared.",
+                        icon: "success"
+                    })
+                }
+            })
+        }
+    }
 
     return (
         <Card className="h-full w-full overflow-scroll">
@@ -109,10 +136,16 @@ function Cart() {
                     </tr>
                 </tfoot>
             </table>
-            <div className="flex flex-row-reverse pr-52 py-1.5">
+            <div className="flex gap-2 flex-row-reverse pr-52 py-1.5">
                 <Link to={"/cart/checkout"}>
-                    <Button className="md">Go to Checkout</Button>
+                    <Button size="sm">Go to Checkout</Button>
                 </Link>
+                <Button
+                    size="sm"
+                    color="red"
+                    onClick={removeAllProducts}>
+                    Clear Cart
+                </Button>
             </div>
         </Card>
     );
